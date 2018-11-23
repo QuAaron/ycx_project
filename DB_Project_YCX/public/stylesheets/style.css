@@ -1,0 +1,42 @@
+body {
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  background-image: url("/public/images/home.jpg");
+  background-color: #cccccc;
+  height: 500px;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  /* position: relative; */
+}
+
+a {
+  color: #00B7FF;
+}
+
+button {
+  width: 300px
+}
+
+.log-in-content {
+  margin-top: 10%
+}
+
+.mdl-textfield__label {
+  color: rgba(0,0,0,0.76)
+}
+
+#log-in-user-name {
+  border-bottom: 2px solid rgba(0,0,0)
+}
+
+#log-in-password {
+  border-bottom: 2px solid rgba(0,0,0)
+}
+
+#home-header {
+  background-color: #944628f0
+}
+
+#tab-bar {
+  border-bottom: none
+}

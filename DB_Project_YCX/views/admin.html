@@ -1,0 +1,65 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="/node/material-design-lite/material.min.css">
+    <link rel="stylesheet" href="/public/stylesheets/style.css">
+    <title>Admin</title>
+</head>
+
+<body>
+    <div class="dmdl-layout mdl-js-layout mdl-layout--fixed-header mdl-tabs mdl-js-tabs mdl-js-ripple-effect">
+        <header class="mdl-layout__header" id="home-header">
+            <div class="mdl-layout__header-row">
+                <!-- Title -->
+                <span class="mdl-layout-title">Admin Page</span>
+                <!-- Add spacer, to align navigation to the right -->
+                <div class="mdl-layout-spacer"></div>
+                <!-- Navigation -->
+                <div class="mdl-tabs__tab-bar" id="tab-bar">
+                    <a class="mdl-tabs__tab is-active" href="#inventory-panel">Inventory</a>
+                    <a class="mdl-tabs__tab" href="#customer-account-panel">Customer Account</a>
+                    <a class="mdl-tabs__tab" href="#admin-account-panel">Admin Account</a>
+                    <a class="mdl-tabs__tab" href="#Analytics">Analytics</a>
+                </div>
+                <!-- Navigation -->
+                <div>
+                    <button class="mdl-button mdl-js-button mdl-button--icon" onclick="logout()">
+                        <i class="material-icons">home</i>
+                    </button>
+                </div>
+            </div>
+        </header>
+        <div class="mdl-layout__drawer">
+            <span class="mdl-layout-title">Title</span>
+            <nav class="mdl-navigation">
+                    <a class="mdl-navigation__link" href="">Link</a>
+                    <a class="mdl-navigation__link" href="">Link</a>
+                    <a class="mdl-navigation__link" href="">Link</a>
+                    <a class="mdl-navigation__link" href="">Link</a>
+                </nav>
+        </div>
+        <main class="mdl-layout__content">
+            <div class="mdl-tabs__panel is-active" id="inventory-panel">
+                <p>inventory-panel</p>
+            </div>
+            <div class="mdl-tabs__panel" id="customer-account-panel">
+                <p>customer-panel</p>
+            </div>
+            <div class="mdl-tabs__panel" id="admin-account-panel">
+                <p>admin-panel</p>
+            </div>
+            <div class="mdl-tabs__panel" id="Analytics">
+                    <p>Analytics</p>
+                </div>
+        </main>
+    </div>
+</body>
+<script src="/node/material-design-lite/material.min.js"> </script>
+<script src="/node/jquery/dist/jquery.js"></script>
+<script src="/public/javascripts/admin.js"></script>
+
+</html>

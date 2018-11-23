@@ -1,0 +1,47 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="/node/material-design-lite/material.min.css">
+    <link rel="stylesheet" href="/public/stylesheets/style.css">
+    <title>Go</title>
+  </head>
+  <body>
+    <div class="mdl-grid log-in-content">
+        <div class="mdl-cell mdl-cell--3-col mdl-textfield mdl-js-textfield mdl-textfield--floating-label mdl-cell">
+            <input class="mdl-textfield__input" type="text" id="log-in-user-name">
+            <label class="mdl-textfield__label" for="sample3">UserName</label>
+          </div>
+          <div class="mdl-cell mdl-cell--3-col mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+              <input class="mdl-textfield__input" type="password" id="log-in-password">
+              <label class="mdl-textfield__label" for="sample3">PassWord</label>
+          </div>
+          <div class="mdl-cell mdl-cell--3-col mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                <input class="mdl-textfield__input" type="password" id="log-in-password">
+                <label class="mdl-textfield__label" for="sample3">FirstName</label>
+            </div>
+            <div class="mdl-cell mdl-cell--3-col mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                    <input class="mdl-textfield__input" type="password" id="log-in-password">
+                    <label class="mdl-textfield__label" for="sample3">LastName</label>
+                </div>
+                <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="option-1">
+                        <input type="radio" id="option-1" class="mdl-radio__button" name="options" value="1" checked>
+                        <span class="mdl-radio__label">Personal</span>
+                      </label>
+                      <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="option-2">
+                        <input type="radio" id="option-2" class="mdl-radio__button" name="options" value="2">
+                        <span class="mdl-radio__label">Bussiness</span>
+                      </label>
+          <div class="mdl-cell mdl-cell--12-col">
+            <button onclick="register()" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">
+                Sign up
+            </button> 
+          </div> 
+    </div>   
+  </body>
+  <script src="/node/material-design-lite/material.min.js"> </script>
+  <script src="/node/jquery/dist/jquery.js"></script>
+  <script src="/public/javascripts/main.js"></script>
+</html>
