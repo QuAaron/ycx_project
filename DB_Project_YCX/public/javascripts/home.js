@@ -1,26 +1,41 @@
 var tableData = [
-    {
-        material: 'test1',
-        Quantity: 10,
-        price: 11
-    },
-    {
-        material: 'test2',
-        Quantity: 20,
-        price: 21
-    },
-    {
-        material: 'test3',
-        Quantity: 30,
-        price: 31
-    }
+    [
+        'test1',
+        10,
+        11
+    ],
+    [
+        'test2',
+        20,
+        21
+    ],
+    [
+        'test3',
+        30,
+        31
+    ],
+    [
+        'test3',
+        30,
+        31
+    ],
+    [
+        'test3',
+        30,
+        31
+    ],
+    [
+        'test3',
+        30,
+        31
+    ]
 ]
 var baseUrl = window.location.origin; 
+var showTable = false;
 
 $(document).ready(function() {
-    $('#items-list').DataTable( {
-        "ajax": '../ajax/data/arrays.txt'
-    } );
+    $('#items-list').DataTable({
+    });
 } );
 
 $('#search-input').keyup(function(e){
@@ -32,7 +47,12 @@ $('#search-input').keyup(function(e){
 
 $('#search-input').on("enterKey",function(e){
     console.log('search')
-    // $("tbody").append("<tr><td class='mdl-data-table__cell--non-numeric'>Laminate (Gold on Blue)</td><td>10</td><td>$2.35</td><tr>");
+    if(showTable) {
+        $('#items-table').hide();
+    } else {
+        $('#items-table').show();
+    }
+    showTable = !showTable;
 });
 
 function logout() {
