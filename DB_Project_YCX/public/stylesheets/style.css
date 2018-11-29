@@ -13,7 +13,11 @@ a {
   color: #00B7FF;
 }
 
-button {
+#items-table td {
+  vertical-align: middle;
+}
+
+.login-button {
   width: 300px
 }
 
@@ -23,6 +27,10 @@ button {
 
 .mdl-textfield__label {
   color: rgba(0,0,0,0.76)
+}
+
+.item-quality-input {
+ width:200px
 }
 
 #log-in-user-name {
@@ -39,4 +47,8 @@ button {
 
 #tab-bar {
   border-bottom: none
+}
+
+#init-msg p{
+  font-size: 20px
 }
