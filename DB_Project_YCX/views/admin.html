@@ -21,9 +21,8 @@
                 <!-- Navigation -->
                 <div class="mdl-tabs__tab-bar" id="tab-bar">
                     <a class="mdl-tabs__tab is-active" href="#inventory-panel">Inventory</a>
-                    <a class="mdl-tabs__tab" href="#customer-account-panel">Customer Account</a>
-                    <a class="mdl-tabs__tab" href="#admin-account-panel">Admin Account</a>
-                    <a class="mdl-tabs__tab" href="#Analytics">Analytics</a>
+                    <a class="mdl-tabs__tab" href="#account-management-panel">Account management</a>
+                    <a class="mdl-tabs__tab" href="#analytics">Analytics</a>
                 </div>
                 <!-- Navigation -->
                 <div>
@@ -36,25 +35,93 @@
         <div class="mdl-layout__drawer">
             <span class="mdl-layout-title">Title</span>
             <nav class="mdl-navigation">
-                    <a class="mdl-navigation__link" href="">Link</a>
-                    <a class="mdl-navigation__link" href="">Link</a>
-                    <a class="mdl-navigation__link" href="">Link</a>
-                    <a class="mdl-navigation__link" href="">Link</a>
-                </nav>
+                <a class="mdl-navigation__link" href="">Link</a>
+                <a class="mdl-navigation__link" href="">Link</a>
+                <a class="mdl-navigation__link" href="">Link</a>
+                <a class="mdl-navigation__link" href="">Link</a>
+            </nav>
         </div>
         <main class="mdl-layout__content">
             <div class="mdl-tabs__panel is-active" id="inventory-panel">
                 <p>inventory-panel</p>
             </div>
-            <div class="mdl-tabs__panel" id="customer-account-panel">
-                <p>customer-panel</p>
-            </div>
-            <div class="mdl-tabs__panel" id="admin-account-panel">
-                <p>admin-panel</p>
-            </div>
-            <div class="mdl-tabs__panel" id="Analytics">
-                    <p>Analytics</p>
+            <div class="mdl-tabs__panel" id="account-management-panel">
+                <div class="mdl-grid log-in-content">
+                    <div class="mdl-cell mdl-cell--3-col mdl-textfield mdl-js-textfield mdl-textfield--floating-label mdl-cell">
+                        <input class="mdl-textfield__input" type="text" id="log-in-user-name">
+                        <label class="mdl-textfield__label" for="sample3">UserName</label>
+                    </div>
+                    <div class="mdl-cell mdl-cell--3-col mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                        <input class="mdl-textfield__input" type="password" id="log-in-password">
+                        <label class="mdl-textfield__label" for="sample3">PassWord</label>
+                    </div>
+                    <div class="mdl-cell mdl-cell--3-col mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                        <input class="mdl-textfield__input" type="password" id="log-in-password">
+                        <label class="mdl-textfield__label" for="sample3">FirstName</label>
+                    </div>
+                    <div class="mdl-cell mdl-cell--2-col mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                        <input class="mdl-textfield__input" type="password" id="log-in-password">
+                        <label class="mdl-textfield__label" for="sample3">LastName</label>
+                    </div>
+                    <div class="mdl-cell mdl-cell--2-col">
+                        <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="option-1">
+                            <input type="radio" id="option-1" class="mdl-radio__button" name="options" value="1"
+                                checked>
+                            <span class="mdl-radio__label">Customer Account</span>
+                        </label>
+                    </div>
+                    <div class="mdl-cell mdl-cell--3-col">
+                        <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="option-2">
+                            <input type="radio" id="option-2" class="mdl-radio__button" name="options" value="2">
+                            <span class="mdl-radio__label">Admin Account</span>
+                        </label>
+                    </div>
+                    <div class="mdl-cell mdl-cell--12-col">
+                        <button onclick="register()" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">
+                            Creat Account
+                        </button>
+                    </div>
                 </div>
+            </div>
+            <div class="mdl-tabs__panel" id="analytics">
+                <div class="mdl-grid log-in-content">
+                    <div class="mdl-cell mdl-cell--3-col">
+                        <div class="mdl-cell mdl-cell--12-col">
+                            <button onclick="register()" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">
+                               Analytics 1
+                            </button>
+                        </div>
+                        <div class="mdl-cell mdl-cell--12-col">
+                            <button onclick="register()" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">
+                                Analytics 2
+                            </button>
+                        </div>
+                        <div class="mdl-cell mdl-cell--12-col">
+                            <button onclick="register()" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">
+                                Analytics 3
+                            </button>
+                        </div>
+                        <div class="mdl-cell mdl-cell--12-col">
+                            <button onclick="register()" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">
+                                Analytics 4
+                            </button>
+                        </div>
+                        <div class="mdl-cell mdl-cell--12-col">
+                            <button onclick="register()" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">
+                                Analytics 5
+                            </button>
+                        </div>
+                        <div class="mdl-cell mdl-cell--12-col">
+                            <button onclick="register()" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">
+                                Analytics 6
+                            </button>
+                        </div>
+                    </div>
+                    <div class="mdl-cell mdl-cell--9-col" id="analytics-chart">
+                        <p>chart!!</p>
+                    </div>
+                </div>
+            </div>
         </main>
     </div>
 </body>
