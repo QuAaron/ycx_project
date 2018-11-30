@@ -14,11 +14,11 @@ function login() {
             password: userPassword
         },
         success: function (response) {
-            console.log(response)
-            if (response.code === 'success') {
-                if (response.type === 'user') {
+            console.log(response.msg)
+            if (response.success) {
+                if (response.data.type === 'user') {
                     window.location.href = baseUrl + '/main'
-                } else if (response.type === 'admin') {
+                } else if (response.data.type === 'admin') {
                     window.location.href = baseUrl + '/admin'
                 }
             }

@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router();
-var mysql = require('mysql')
+var mysql = require('mysql');
+
 var connection = mysql.createConnection({
   host: 'localhost',
   user: 'root',
@@ -9,6 +10,7 @@ var connection = mysql.createConnection({
   database: 'ycx_schema',
   Socket:'/Applications/MAMP/tmp/mysql/mysql.sock'
 });
+
 connection.connect(function(err) {
   if (err) throw err
 });
@@ -20,29 +22,30 @@ router.get('/', function (req, res, next) {
 
 router.get('/login', function (req, res, next) {
   console.log(req.query);
-  var userId = req.query.userId;
-  var passWord = parseInt(req.query.password);
-  var sql = 'SELECT * From `user` where userid =' + userId;
-  var response = {code: 'user not found', type: null};
-
-  new Promise(function(resolve, reject) {
-    connection.query(sql, function (err, rows, fields) {
-      try {
-        if(rows[0].password == passWord) {
-          response.code = 'success';
-          response.type = rows[0].type;
-        } else if (rows[0].password !== passWord) {
-          response.code = 'invalid password'
+    var userId = req.query.userId;
+    var passWord = parseInt(req.query.password);
+    var sql = 'SELECT * From `customer` where id =' + userId;
+    var response = {success: false, msg: null, data: null};
+  
+    new Promise(function(resolve, reject) {
+      connection.query(sql, function (err, rows, fields) {
+        try {
+          if(rows[0].password == passWord) {
+            response.success = true;
+            response.msg = 'success';
+            response.data = {type: rows[0].Type};
+          } else if (rows[0].password !== passWord) {
+            response.msg = 'invalid password';
+          }
+          resolve(response);
+          res.send(response);
         }
-        resolve(response);
-        res.send(response);
-      }
-      catch(error){
-        res.send(response);
-        console.log(error)
-      }
+        catch(error){
+          response.msg = 'DB response error'
+          res.send(response);
+        }
+      });
     });
-  });
 });
 
 module.exports = router;

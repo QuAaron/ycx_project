@@ -26,18 +26,26 @@
                     <input class="mdl-textfield__input" type="password" id="log-in-password">
                     <label class="mdl-textfield__label" for="sample3">LastName</label>
                 </div>
-                <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="option-1">
-                        <input type="radio" id="option-1" class="mdl-radio__button" name="options" value="1" checked>
-                        <span class="mdl-radio__label">Personal</span>
-                      </label>
-                      <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="option-2">
-                        <input type="radio" id="option-2" class="mdl-radio__button" name="options" value="2">
-                        <span class="mdl-radio__label">Bussiness</span>
-                      </label>
+                <div class="mdl-cell mdl-cell--2-col">
+                  <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="option-1">
+                      <input type="radio" id="option-1" class="mdl-radio__button" name="options" value="1"
+                          checked>
+                      <span class="mdl-radio__label">Personal Account</span>
+                  </label>
+              </div>
+              <div class="mdl-cell mdl-cell--3-col">
+                  <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="option-2">
+                      <input type="radio" id="option-2" class="mdl-radio__button" name="options" value="2">
+                      <span class="mdl-radio__label">Bussiness Account</span>
+                  </label>
+              </div>
           <div class="mdl-cell mdl-cell--12-col">
             <button onclick="register()" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">
                 Sign up
             </button> 
+            <button onclick="register()" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">
+                Log in
+          </button> 
           </div> 
     </div>   
   </body>
