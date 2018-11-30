@@ -1,12 +1,12 @@
-.loginbody {
+body {
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
-  background-image: url("/public/images/home.jpg");
+  background-image: url("/public/images/bg.jpg");
   background-color: #cccccc;
-  height: 500px;
-  background-position: center;
+  height: 100%;
+  /* background-position: center; */
   background-repeat: no-repeat;
   background-size: cover;
-  /* position: relative; */
+  position: relative;
 }
 
 a {
@@ -17,6 +17,9 @@ a {
   vertical-align: middle;
 }
 
+.content {
+  padding-top: 10%
+}
 .login-button {
   width: 300px
 }
