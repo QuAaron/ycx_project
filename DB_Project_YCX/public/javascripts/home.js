@@ -2,6 +2,14 @@ var tableData = [
 ]
 var baseUrl = window.location.origin; 
 var showTable = false;
+_validateUser();
+
+function _validateUser() {
+    validated = sessionStorage.getItem('userType') === 'user' ? true : false;
+    if(!validated) {
+        window.location.href = baseUrl
+    }
+}
 
 $(document).ready(function() {
     var table = $('#items-list').DataTable({

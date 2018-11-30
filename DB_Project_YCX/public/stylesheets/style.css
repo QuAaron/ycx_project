@@ -36,6 +36,13 @@ a {
  width:200px
 }
 
+#log-in-error-msg {
+  color: red
+}
+
+#error-msg-wrap {
+  height: 30px;
+}
 #log-in-user-name {
   border-bottom: 2px solid rgba(0,0,0)
 }
