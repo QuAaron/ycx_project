@@ -28,14 +28,14 @@ function login() {
             password: userPassword
         },
         success: function (response) {
-            console.log(response.msg)
+            console.log(response)
             if (response.success) {
-                if (response.data.type === 'user') {
-                    sessionStorage.setItem('userType','user');
-                    window.location.href = baseUrl + '/main'
-                } else if (response.data.type === 'admin') {
+                if (response.data.type === 'admin') {
                     sessionStorage.setItem('userType','admin');
                     window.location.href = baseUrl + '/admin'
+                } else if (response.data.type === 'home' || response.data.type === 'business') {
+                    sessionStorage.setItem('userType','user');
+                    window.location.href = baseUrl + '/main'
                 }
             }else {
                 _showErrorMsg();
@@ -52,6 +52,51 @@ function signup() {
     window.location.href = baseUrl + '/signup'
 }
 
+function backToLogIn() {
+    window.location.href = baseUrl 
+}
+
+function validateEmail(email) {
+    var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    return re.test(String(email).toLowerCase());
+}
+
 function register() {
-    window.location.href = baseUrl
+    var newUserId = $('#sign-up-user-id').val();
+    var newPassword = $('#sign-up-password').val();
+    var newUserFirstName = $('#sign-up-firstname').val();
+    var newUserLastName = $('#sign-up-lastname').val();
+    var newUserName = newUserFirstName + newUserLastName;
+    var newUserEmail = $('#sign-up-email').val();
+    var newUserType = $('input[name=options]:checked').val();
+    console.log(newUserId,newPassword,newUserName,newUserEmail)
+    console.log(newUserType)
+    if(!newUserId || !newPassword || !newUserFirstName || !newUserLastName || !newUserEmail || !validateEmail(newUserEmail)){
+        _showErrorMsg();
+    } else {
+        $.ajax({
+            url: 'http://127.0.0.1:8081/users/register',
+            type: "GET",
+            data: {
+                id: newUserId,
+                name: newUserName + newUserLastName,
+                type: newUserType === 1? 'home' : 'business',
+                email: newUserEmail,
+                password: newPassword
+            },
+            success: function (response) {
+                console.log(response)
+                if (response.success) {
+                    alert('successfully registered')
+                    window.location.href = baseUrl
+                }else {
+                }
+            },
+            error: function () {
+                console.log('http request error')
+            }
+        })
+        _hideErrorMsg()
+    }
+    //window.location.href = baseUrl
 }
