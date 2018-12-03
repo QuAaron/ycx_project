@@ -3,7 +3,7 @@ var router = express.Router();
 var mysql = require('mysql');
 
 var connection = mysql.createConnection({
-  host: 'mc-wifi-10-215-120-42.wireless.pitt.edu',//'fq-wifi-10-215-203-29.wireless.pitt.edu',
+  host: 'Yayuns-MacBook-Pro.local',//'fq-wifi-10-215-203-29.wireless.pitt.edu',
   user: 'dbuser',
   port: '3306',
   password: 'database1234!',
@@ -229,6 +229,73 @@ router.get('/updateinventory', function (req, res, next) {
         response.success = true;
         response.msg = 'success';
         response.data = rows;
+        resolve(response);
+        res.send(response);
+      }
+      catch (error) {
+        response.msg = 'DB response error'
+        res.send(response);
+      }
+    });
+  });
+})
+
+router.get('/updatequantity', function (req, res, next) {
+  var id = req.query.product_id;
+  var quantity = req.query.newQuantiy;
+  var storeName = req.query.storeName;
+  var response = { success: false, msg: null, data: null };
+  var sql = "UPDATE product_store SET quantity = "+quantity+" WHERE product_id = '"+id+"' and store = '"+storeName+"'";
+  console.log(sql)
+  new Promise(function (resolve, reject) {
+    connection.query(sql, function (err, rows, fields) {
+      try {
+        response.success = true;
+        response.msg = 'success';
+        resolve(response);
+        res.send(response);
+      }
+      catch (error) {
+        response.msg = 'DB response error'
+        res.send(response);
+      }
+    });
+  });
+})
+
+router.get('/getallitems', function (req, res, next) {
+  var response = { success: false, msg: null, data: null };
+  var sql = "SELECT * FROM DB_Project_Final.product;"
+  console.log(sql)
+  new Promise(function (resolve, reject) {
+    connection.query(sql, function (err, rows, fields) {
+      try {
+        response.success = true;
+        response.msg = 'success';
+        response.data = {"data": rows};
+        var check = JSON.parse(JSON.stringify(response.data));
+        resolve(check);
+        res.send(check);
+      }
+      catch (error) {
+        response.msg = 'DB response error'
+        res.send(response);
+      }
+    });
+  });
+})
+
+router.get('/updateprice', function (req, res, next) {
+  var product_id = req.query.product_id;
+  var newprice = req.query.newprice;
+  var response = { success: false, msg: null, data: null };
+  var sql = "UPDATE product SET price = "+newprice+" WHERE product_id = '"+product_id+"';"
+  console.log(sql)
+  new Promise(function (resolve, reject) {
+    connection.query(sql, function (err, rows, fields) {
+      try {
+        response.success = true;
+        response.msg = 'success';
         resolve(response);
         res.send(response);
       }

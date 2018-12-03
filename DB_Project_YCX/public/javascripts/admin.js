@@ -1,55 +1,181 @@
 var baseUrl = window.location.origin;
+var storelist = null;
 var editor
 _validateUser();
 _hideErrorMsg();
 initialMsg();
+getStoreList();
+
 function _validateUser() {
     validated = sessionStorage.getItem('userType') === 'admin' ? true : false;
     if (!validated) {
         window.location.href = baseUrl
     }
 }
+function getStoreList() {
+    $.ajax({
+        url: 'http://127.0.0.1:8081/users/storelist',
+        type: "GET",
+        success: function (response) {
+            console.log(response)
+            if (response.success) {
+                storelist = response.data;
+            }
+        },
+        error: function () {
+            console.log('http request error')
+        }
+    })
+};
 
 $(document).ready(function () {
+    editor = new $.fn.dataTable.Editor({
+        "table": '#items-list-admin',
+        "idSrc": "product_id",
+        "fields": [ {
+            "label": "product_id:",
+            "name": "product_id"
+        }, {
+            "label": "name:",
+            "name": "name"
+        }, {
+            "label": "price:",
+            "name": "price"
+        }, {
+            "label": "brand:",
+            "name": "brand"
+        },{
+            "label": "type",
+            "name": "type"
+        }
+    ]
+    });
+
     var table = $('#items-list-admin').DataTable({
-        'autoWidth': false,
-    })
-
-    $(document).ready(function () {
-        editor = new $.fn.dataTable.Editor({
-            table: '#items-list-admin',
-            fields: [{
-                label: "First name:",
-                name: "first_name"
-            }, {
-                label: "Last name:",
-                name: "last_name"
-            }, {
-                label: "Position:",
-                name: "position"
-            }, {
-                label: "Office:",
-                name: "office"
-            }, {
-                label: "Extension:",
-                name: "extn"
-            }, {
-                label: "Start date:",
-                name: "start_date",
-                type: "datetime"
-            }, {
-                label: "Salary:",
-                name: "salary"
+        "ajax": '/users/getallitems',
+        "columnDefs": [
+            {
+                "targets": 0,
+                "width": "10%",
+                "data": "product_id"
+            },
+            {
+                "targets": 1,
+                "width": "20%",
+                "data": "name"
+            },
+            {
+                "targets": 2,
+                "width": "20%",
+                "data": "price"
+            },
+            {
+                "targets": 3,
+                "width": "20%",
+                "data": "brand"
+            },
+            {
+                "targets": 4,
+                "width": "20%",
+                "data": "type"
+            },
+            { 
+                "targets": 5,
+                "data": null,
+                "width": "15%",
+                "render": function ( data, type, full, meta ) {
+                    var selectElement = '<select id="'+ data.product_id + '-select" name="dynamic_select">\n\
+                    <option id="0" value="">Select Store</option/>\n\
+                    ';
+                    storelist.forEach(element => {
+                        selectElement = selectElement + '<option id="" value="">'+element.name+'</option/>'
+                    });
+                    return selectElement
+                }
+            },
+            {
+                "targets": 6,
+                "data": null,
+                "width": "5%",
+                "render": function ( data, type, full, meta ) {
+                    return "<div class='item-quality-input mdl-textfield mdl-js-textfield mdl-textfield--floating-label'>"
+                    +"<input class='mdl-textfield__input' id='" +data.product_id+ "' type='text' pattern='-?[0-9]*(\.[0-9]+)?'>"
+                }
+            },
+            {
+                "targets": 7,
+                "data": null,
+                "render": function ( data, type, full, meta ) {
+                    return "<button class='mdl-button mdl-js-button mdl-button--icon'>"
+                    + "<i class='material-icons'>edit</i></button>";
+                }
             }
-            ]
-        });
-
-        $('#items-list-admin').on('click', 'tbody td:not(:first-child)', function (e) {
-            console.log('ddd')
-            editor.inline(this);
-        });
+        ]
     })
+    $('#items-list-admin').on('click', 'tbody td:nth-child(3)', function (e) {
+        console.log('ddd1')
+        editor.inline(this, {
+            submit: 'changed'
+        });
+    });
+    $('#items-list-admin').on('click', 'tbody td:nth-child(8)', function () {
+        console.log('ddds')
+        var newData = table.row( $(this).parents('tr') ).data();
+        var newQuantiy = $('#'+newData.product_id).val();
+        console.log(newData)
+        console.log(newQuantiy);
+        updatePrice(newData.price, newData.product_id);
+        if(isNaN(newQuantiy) || !newQuantiy ){
+            alert('invalid quantity');
+        } else {
+            updateQuantity(newQuantiy, newData.product_id);  
+        }
+    } );
 })
+
+function updatePrice(newprice,product_id) {
+    console.log('dd')
+    $.ajax({
+        url: 'http://127.0.0.1:8081/users/updateprice',
+        type: "GET",
+        data: {
+            newprice: parseInt(newprice),
+            product_id: product_id
+        },
+        success: function (response) {
+            console.log(response)
+            if (response.success) {
+                alert('successfully update price')
+            } else {
+            }
+        },
+        error: function () {
+            console.log('http request error')
+        }
+    })
+}
+function updateQuantity(newQuantiy, product_id) {
+    var storeName = $('#'+ product_id +'-select').find(":selected").text();
+    $.ajax({
+        url: 'http://127.0.0.1:8081/users/updatequantity',
+        type: "GET",
+        data: {
+            storeName: storeName,
+            product_id: product_id,
+            newQuantiy: parseInt(newQuantiy)
+        },
+        success: function (response) {
+            console.log(response)
+            if (response.success) {
+                alert('successfully update quantity')
+            } else {
+            }
+        },
+        error: function () {
+            console.log('http request error')
+        }
+    })
+}
 
 function logout() {
     console.log(window.location.origin)
@@ -160,7 +286,7 @@ function showAnalytics1() {
                 $('#analytics-chart').append('<table class="table table-striped table-bordered" id="analytics1-table"> <thead> <tr><td> Name</td><td>Amount</td> </tr> </thead> </table>')
                 var table = $('#analytics1-table');
                 response.data.forEach(element => {
-                    var row = '<tr><td>'+element.name+'</td><td>'+element.count+'</td></tr>';
+                    var row = '<tr><td>' + element.name + '</td><td>' + element.count + '</td></tr>';
                     console.log(row)
                     table.append(row);
                 });
@@ -186,7 +312,7 @@ function showAnalytics2() {
                 $('#analytics-chart').append('<table class="table table-striped table-bordered" id="analytics1-table"> <thead> <tr><td>Customer Count</td><td>Region</td> </tr> </thead> </table>')
                 var table = $('#analytics1-table');
                 response.data.forEach(element => {
-                    var row = '<tr><td>'+element.count+'</td><td>'+element.region+'</td></tr>';
+                    var row = '<tr><td>' + element.count + '</td><td>' + element.region + '</td></tr>';
                     console.log(row)
                     table.append(row);
                 });
@@ -212,7 +338,7 @@ function showAnalytics3() {
                 $('#analytics-chart').append('<table class="table table-striped table-bordered" id="analytics1-table"> <thead> <tr><td>Order Count</td><td>Brand</td> </tr> </thead> </table>')
                 var table = $('#analytics1-table');
                 response.data.forEach(element => {
-                    var row = '<tr><td>'+element.count+'</td><td>'+element.brand+'</td></tr>';
+                    var row = '<tr><td>' + element.count + '</td><td>' + element.brand + '</td></tr>';
                     console.log(row)
                     table.append(row);
                 });
@@ -238,7 +364,7 @@ function showAnalytics4() {
                 $('#analytics-chart').append('<table class="table table-striped table-bordered" id="analytics1-table"> <thead> <tr><td>Salesmen Count</td><td>Product Type</td> </tr> </thead> </table>')
                 var table = $('#analytics1-table');
                 response.data.forEach(element => {
-                    var row = '<tr><td>'+element.number_of_salesmen+'</td><td>'+element.product_type+'</td></tr>';
+                    var row = '<tr><td>' + element.number_of_salesmen + '</td><td>' + element.product_type + '</td></tr>';
                     console.log(row)
                     table.append(row);
                 });
@@ -264,7 +390,7 @@ function showAnalytics5() {
                 $('#analytics-chart').append('<table class="table table-striped table-bordered" id="analytics1-table"> <thead> <tr><td>Name</td><td>Store</td><td>Region</td></tr> </thead> </table>')
                 var table = $('#analytics1-table');
                 response.data.forEach(element => {
-                    var row = '<tr><td>'+element.name+'</td><td>'+element.store+'</td><td>'+element.region+'</td></tr>';
+                    var row = '<tr><td>' + element.name + '</td><td>' + element.store + '</td><td>' + element.region + '</td></tr>';
                     console.log(row)
                     table.append(row);
                 });
