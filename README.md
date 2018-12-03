@@ -1,4 +1,4 @@
-# ycx_project\
+# ycx_project
 personal project\
 UI: Material-desgin-lite, HTML, CSS, JQuery, Datatable, Datatable Editor\
 Service: ExpressJSm\
