@@ -101,7 +101,7 @@ $('#search-input').on("enterKey",function(e){
 
 function getStoreList() {
     $.ajax({
-        url: 'http://127.0.0.1:8081/users/storelist',
+        url: '/users/storelist',
         type: "GET",
         success: function (response) {
             console.log(response)
@@ -117,7 +117,7 @@ function getStoreList() {
 
 function searchItems(keyword) {
     $.ajax({
-        url: 'http://127.0.0.1:8081/users/items',
+        url: '/users/items',
         type: "GET",
         data: {
             keyword: keyword
@@ -141,7 +141,7 @@ function searchItems(keyword) {
 
 function checkInventory(id,storeName,quantity) {
     $.ajax({
-        url: 'http://127.0.0.1:8081/users/iteminventory',
+        url: '/users/iteminventory',
         type: "GET",
         data: {
             product_id: id,
@@ -213,7 +213,7 @@ function purchase() {
         'orderQuantity': orderQuantity
     }
     $.ajax({
-        url: 'http://127.0.0.1:8081/users/orderid',
+        url: '/users/orderid',
         type: "GET",
         success: function (response) {
             if (response.success) {
@@ -221,7 +221,7 @@ function purchase() {
                 purchaseData.orderID = 'ABC' + (parseInt(response.data[0].order_id.match(/\d+$/)) + 1);
                 console.log(purchaseData)
                 $.ajax({
-                    url: 'http://127.0.0.1:8081/users/order1',
+                    url: '/users/order1',
                     type: "GET",
                     data: {
                         id: purchaseData.customerId,
@@ -231,7 +231,7 @@ function purchase() {
                     success: function (response) {
                         if (response.success) {
                             $.ajax({
-                                url: 'http://127.0.0.1:8081/users/order2',
+                                url: '/users/order2',
                                 type: "GET",
                                 data: {
                                     address: purchaseData.orderAddress,
@@ -243,7 +243,7 @@ function purchase() {
                                 success: function (response) {
                                     if (response.success) {
                                         $.ajax({
-                                            url: 'http://127.0.0.1:8081/users/order3',
+                                            url: '/users/order3',
                                             type: "GET",
                                             data: {
                                                 orderid: purchaseData.orderID,
@@ -253,7 +253,7 @@ function purchase() {
                                             success: function (response) {
                                                 if (response.success) {
                                                     $.ajax({
-                                                        url: 'http://127.0.0.1:8081/users/updateinventory',
+                                                        url: '/users/updateinventory',
                                                         type: "GET",
                                                         data: {
                                                             storeName: purchaseData.storeName,

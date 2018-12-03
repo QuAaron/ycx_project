@@ -14,7 +14,7 @@ function _validateUser() {
 }
 function getStoreList() {
     $.ajax({
-        url: 'http://127.0.0.1:8081/users/storelist',
+        url: '/users/storelist',
         type: "GET",
         success: function (response) {
             console.log(response)
@@ -136,7 +136,7 @@ $(document).ready(function () {
 function updatePrice(newprice,product_id) {
     console.log('dd')
     $.ajax({
-        url: 'http://127.0.0.1:8081/users/updateprice',
+        url: '/users/updateprice',
         type: "GET",
         data: {
             newprice: parseInt(newprice),
@@ -157,7 +157,7 @@ function updatePrice(newprice,product_id) {
 function updateQuantity(newQuantiy, product_id) {
     var storeName = $('#'+ product_id +'-select').find(":selected").text();
     $.ajax({
-        url: 'http://127.0.0.1:8081/users/updatequantity',
+        url: '/users/updatequantity',
         type: "GET",
         data: {
             storeName: storeName,
@@ -207,7 +207,7 @@ function register() {
         _showErrorMsg();
     } else {
         $.ajax({
-            url: 'http://127.0.0.1:8081/users/register',
+            url: '/users/register',
             type: "GET",
             data: {
                 id: newUserId,
@@ -277,7 +277,7 @@ function showAnalytics1() {
     initialMsg();
     $('#analytics-header').text('Obtaining customer who made most orders');
     $.ajax({
-        url: 'http://127.0.0.1:8081/users/analytics1',
+        url: '/users/analytics1',
         type: "GET",
         success: function (response) {
             console.log(response)
@@ -303,7 +303,7 @@ function showAnalytics2() {
     initialMsg();
     $('#analytics-header').text('Count number of customer in each region');
     $.ajax({
-        url: 'http://127.0.0.1:8081/users/analytics2',
+        url: '/users/analytics2',
         type: "GET",
         success: function (response) {
             console.log(response.data)
@@ -329,7 +329,7 @@ function showAnalytics3() {
     initialMsg();
     $('#analytics-header').text('Count number of brand');
     $.ajax({
-        url: 'http://127.0.0.1:8081/users/analytics3',
+        url: '/users/analytics3',
         type: "GET",
         success: function (response) {
             console.log(response.data)
@@ -355,7 +355,7 @@ function showAnalytics4() {
     initialMsg();
     $('#analytics-header').text('Obtaining number of salesmen in each product type in North region');
     $.ajax({
-        url: 'http://127.0.0.1:8081/users/analytics4',
+        url: '/users/analytics4',
         type: "GET",
         success: function (response) {
             console.log(response.data)
@@ -381,7 +381,7 @@ function showAnalytics5() {
     initialMsg();
     $('#analytics-header').text('Find the most popular brand sold in our website');
     $.ajax({
-        url: 'http://127.0.0.1:8081/users/analytics5',
+        url: '/users/analytics5',
         type: "GET",
         success: function (response) {
             console.log(response)

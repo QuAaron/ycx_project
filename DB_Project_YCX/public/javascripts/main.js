@@ -22,7 +22,7 @@ function login() {
     console.log(userPassword);
     console.log(baseUrl)
     $.ajax({
-        url: 'http://127.0.0.1:8081/users/login',
+        url: '/users/login',
         type: "GET",
         data: {
             userId: userId,
@@ -77,7 +77,7 @@ function register() {
         _showErrorMsg();
     } else {
         $.ajax({
-            url: 'http://127.0.0.1:8081/users/register',
+            url: '/users/register',
             type: "GET",
             data: {
                 id: newUserId,
