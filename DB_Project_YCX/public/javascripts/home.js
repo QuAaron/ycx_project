@@ -303,26 +303,6 @@ function purchase() {
             console.log('http request error')
         }
     })
-    // $.ajax({
-    //     url: 'http://127.0.0.1:8081/users/updateinventory',
-    //     type: "GET",
-    //     data: {
-    //         product_id: id,
-    //         storeName: storeName,
-    //         quantity: quantity
-    //     },
-    //     success: function (response) {
-    //         console.log(response)
-    //         if (response.success) {
-    //             alert('good choice')
-    //         } else {
-    //             alert('not enough inventory')
-    //         }
-    //     },
-    //     error: function () {
-    //         console.log('http request error')
-    //     }
-    // })
 }
 
 function logout() {
