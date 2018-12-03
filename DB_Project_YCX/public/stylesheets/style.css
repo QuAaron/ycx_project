@@ -36,6 +36,12 @@ a {
  width:200px
 }
 
+input:focus {
+  outline: saddlebrown !important;
+  outline-offset: 20px !important
+}
+.mdl-textfield{padding-bottom: 27px;}
+
 #log-in-error-msg {
   color: red
 }

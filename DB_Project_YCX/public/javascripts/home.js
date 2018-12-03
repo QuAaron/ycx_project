@@ -1,6 +1,11 @@
 var tableData = null;
 var baseUrl = window.location.origin;
+var customerId = sessionStorage.getItem('customerId');
 var storelist = null;
+var product_id = null;
+var orderStoreName = null;
+var orderItemName = null;
+var orderQuantity = null;
 _validateUser();
 
 function _validateUser() {
@@ -56,7 +61,7 @@ $(document).ready(function() {
             "targets": 6,
             "data": null,
             "render": function ( data, type, full, meta ) {
-                return "<button class='mdl-button mdl-js-button mdl-button--icon'>"
+                return "<button class='mdl-button mdl-js-button mdl-button--icon' data-target='#purchaseModal'>"
                 + "<i class='material-icons'>shopping_cart</i></button>";
             }
         }]
@@ -146,7 +151,8 @@ function checkInventory(id,storeName,quantity) {
         success: function (response) {
             console.log(response)
             if (response.success) {
-                purchase(id, storeName, quantity);
+                $('#purchaseModal').modal('show');
+                setOrderInfo(id, storeName, quantity)
             } else {
                 alert('not enough inventory')
             }
@@ -157,27 +163,166 @@ function checkInventory(id,storeName,quantity) {
     })
 }
 
-function purchase(id, storeName, quantity) {
+function setOrderInfo(id, storeName, quantity) {
+    product_id = id;
+    orderStoreName = storeName;
+    orderQuantity = quantity;
+}
+
+function resetOrderInfo() {
+    product_id = null;
+    orderStoreName = null;
+    orderQuantity = null;
+}
+
+function purchase() {
+    var orderCardNumber = $('#orderCardNumber').val();
+    var orderPhoneNumber = $('#orderPhoneNumber').val();
+    var orderAddress = $('#orderAddress').val();
+    var orderName = $('#orderName').val();
+    var orderID = null;
+    var region = null;
+    console.log(orderStoreName)
+    switch(orderStoreName) {
+        case 'CHI':
+            region = 'North'
+            break;
+        case 'NYC':
+            region = 'Northeast'
+            break;
+        case 'PITT':
+            region = 'Northeast'
+            break;
+        case 'MIA':
+            region = 'South'
+            break;
+        case 'LA':
+            region = 'West'
+            break;
+    };
+    purchaseData = {
+        'customerId' : customerId,
+        'product_id' : product_id,
+        'orderID' : orderID,
+        'orderName' : orderName,
+        'orderAddress' : orderAddress,
+        'orderPhoneNumber' : orderPhoneNumber,
+        'orderCardNumber' : orderCardNumber,
+        'storeName' : orderStoreName,
+        'region' : region,
+        'orderQuantity': orderQuantity
+    }
     $.ajax({
-        url: 'http://127.0.0.1:8081/users/updateinventory',
+        url: 'http://127.0.0.1:8081/users/orderid',
         type: "GET",
-        data: {
-            product_id: id,
-            storeName: storeName,
-            quantity: quantity
-        },
         success: function (response) {
-            console.log(response)
             if (response.success) {
-                alert('good choice')
+                console.log(response.data[0])
+                purchaseData.orderID = 'ABC' + (parseInt(response.data[0].order_id.match(/\d+$/)) + 1);
+                console.log(purchaseData)
+                $.ajax({
+                    url: 'http://127.0.0.1:8081/users/order1',
+                    type: "GET",
+                    data: {
+                        id: purchaseData.customerId,
+                        orderid: purchaseData.orderID,
+                        region: purchaseData.region
+                    },
+                    success: function (response) {
+                        if (response.success) {
+                            $.ajax({
+                                url: 'http://127.0.0.1:8081/users/order2',
+                                type: "GET",
+                                data: {
+                                    address: purchaseData.orderAddress,
+                                    orderid: purchaseData.orderID,
+                                    orderCardNumber: purchaseData.orderCardNumber,
+                                    orderPhoneNumber: purchaseData.orderPhoneNumber,
+                                    orderName: purchaseData.orderName
+                                },
+                                success: function (response) {
+                                    if (response.success) {
+                                        $.ajax({
+                                            url: 'http://127.0.0.1:8081/users/order3',
+                                            type: "GET",
+                                            data: {
+                                                orderid: purchaseData.orderID,
+                                                product_id: purchaseData.product_id,
+                                                quantity: purchaseData.orderQuantity
+                                            },
+                                            success: function (response) {
+                                                if (response.success) {
+                                                    $.ajax({
+                                                        url: 'http://127.0.0.1:8081/users/updateinventory',
+                                                        type: "GET",
+                                                        data: {
+                                                            storeName: purchaseData.storeName,
+                                                            product_id: purchaseData.product_id,
+                                                            quantity: purchaseData.orderQuantity
+                                                        },
+                                                        success: function (response) {
+                                                            if (response.success) {
+                                                                alert('success purchase')
+                                                            } else {
+                                                                alert('database error')
+                                                            }
+                                                        },
+                                                        error: function () {
+                                                            console.log('http request error')
+                                                        }
+                                                    })
+                                                } else {
+                                                    alert('database error')
+                                                }
+                                            },
+                                            error: function () {
+                                                console.log('http request error')
+                                            }
+                                        })
+                                    } else {
+                                        alert('database error')
+                                    }
+                                },
+                                error: function () {
+                                    console.log('http request error')
+                                }
+                            })
+                        } else {
+                            alert('database error')
+                        }
+                    },
+                    error: function () {
+                        console.log('http request error')
+                    }
+                })
             } else {
-                alert('not enough inventory')
+                alert('database error')
             }
         },
         error: function () {
             console.log('http request error')
         }
     })
+    // $.ajax({
+    //     url: 'http://127.0.0.1:8081/users/updateinventory',
+    //     type: "GET",
+    //     data: {
+    //         product_id: id,
+    //         storeName: storeName,
+    //         quantity: quantity
+    //     },
+    //     success: function (response) {
+    //         console.log(response)
+    //         if (response.success) {
+    //             alert('good choice')
+    //         } else {
+    //             alert('not enough inventory')
+    //         }
+    //     },
+    //     error: function () {
+    //         console.log('http request error')
+    //     }
+    // })
 }
 
 function logout() {
@@ -191,8 +336,8 @@ function tryPurchase(id) {
     var storeName = $('#'+ id +'-select').find(":selected").text();
     console.log(storeName)
 
-    if(isNaN(quantity) || !quantity) {
-        alert("invalid amount")
+    if(isNaN(quantity) || !quantity || storeName == 'Select Store') {
+        alert("invalid input")
     } else {
         checkInventory(id,storeName,quantity);
     }

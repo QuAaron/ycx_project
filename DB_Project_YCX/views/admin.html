@@ -72,35 +72,48 @@
             </div>
             <div class="mdl-tabs__panel" id="account-management-panel">
                 <div class="mdl-grid log-in-content">
-                    <div class="mdl-cell mdl-cell--3-col mdl-textfield mdl-js-textfield mdl-textfield--floating-label mdl-cell">
-                        <input class="mdl-textfield__input" type="text" id="log-in-user-name">
-                        <label class="mdl-textfield__label" for="sample3">UserName</label>
-                    </div>
-                    <div class="mdl-cell mdl-cell--3-col mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                        <input class="mdl-textfield__input" type="password" id="log-in-password">
-                        <label class="mdl-textfield__label" for="sample3">PassWord</label>
-                    </div>
-                    <div class="mdl-cell mdl-cell--3-col mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                        <input class="mdl-textfield__input" type="password" id="log-in-password">
-                        <label class="mdl-textfield__label" for="sample3">FirstName</label>
-                    </div>
-                    <div class="mdl-cell mdl-cell--2-col mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                        <input class="mdl-textfield__input" type="password" id="log-in-password">
-                        <label class="mdl-textfield__label" for="sample3">LastName</label>
-                    </div>
-                    <div class="mdl-cell mdl-cell--2-col">
+                        <div class="mdl-cell mdl-cell--3-col mdl-textfield mdl-js-textfield mdl-textfield--floating-label mdl-cell">
+                                <input class="mdl-textfield__input" type="text" id="sign-up-user-id">
+                                <label class="mdl-textfield__label" for="sample3">UserID</label>
+                            </div>
+                            <div class="mdl-cell mdl-cell--3-col mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                                <input class="mdl-textfield__input" type="password" id="sign-up-password">
+                                <label class="mdl-textfield__label" for="sample3">PassWord</label>
+                            </div>
+                            <div class="mdl-cell mdl-cell--3-col mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                                <input class="mdl-textfield__input" id="sign-up-firstname">
+                                <label class="mdl-textfield__label" for="sample3">FirstName</label>
+                            </div>
+                            <div class="mdl-cell mdl-cell--3-col mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                                <input class="mdl-textfield__input" id="sign-up-lastname">
+                                <label class="mdl-textfield__label" for="sample3">LastName</label>
+                            </div>
+                            <div class="mdl-cell mdl-cell--12-col mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                                <input class="mdl-textfield__input" type="email" id="sign-up-email">
+                                <label class="mdl-textfield__label" for="sample3">E-mail</label>
+                            </div>
+                    <div class="mdl-cell mdl-cell--3-col">
                         <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="option-1">
                             <input type="radio" id="option-1" class="mdl-radio__button" name="options" value="1"
                                 checked>
-                            <span class="mdl-radio__label">Customer Account</span>
+                            <span class="mdl-radio__label">Home Account</span>
                         </label>
                     </div>
                     <div class="mdl-cell mdl-cell--3-col">
+                            <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="option-3">
+                                <input type="radio" id="option-3" class="mdl-radio__button" name="options" value="2">
+                                <span class="mdl-radio__label">Business Account</span>
+                            </label>
+                        </div>
+                    <div class="mdl-cell mdl-cell--3-col">
                         <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="option-2">
-                            <input type="radio" id="option-2" class="mdl-radio__button" name="options" value="2">
+                            <input type="radio" id="option-2" class="mdl-radio__button" name="options" value="3">
                             <span class="mdl-radio__label">Admin Account</span>
                         </label>
                     </div>
+                    <div class="mdl-cell mdl-cell--12-col" id="error-msg-wrap">
+                            <p id="log-in-error-msg">Please enter all required input</p>
+                        </div>
                     <div class="mdl-cell mdl-cell--12-col">
                         <button onclick="register()" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">
                             Creat Account

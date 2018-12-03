@@ -20,15 +20,15 @@
                 <span class="mdl-layout-title">Welcome To Neverland</span>
                 <!-- Add spacer, to align navigation to the right -->
                 <div class="mdl-layout-spacer"></div>
-                    <div class="mdl-textfield mdl-js-textfield mdl-textfield--expandable">
-                        <label class="mdl-button mdl-js-button mdl-button--icon" for="search-input">
-                            <i class="material-icons">search</i>
-                        </label>
-                        <div class="mdl-textfield__expandable-holder">
-                            <input class="mdl-textfield__input" type="text" id="search-input">
-                            <!-- <label class="mdl-textfield__label" for="sample-expandable">Expandable Input</label> -->
-                        </div>
+                <div class="mdl-textfield mdl-js-textfield mdl-textfield--expandable">
+                    <label class="mdl-button mdl-js-button mdl-button--icon" for="search-input">
+                        <i class="material-icons">search</i>
+                    </label>
+                    <div class="mdl-textfield__expandable-holder">
+                        <input class="mdl-textfield__input" type="text" id="search-input">
+                        <!-- <label class="mdl-textfield__label" for="sample-expandable">Expandable Input</label> -->
                     </div>
+                </div>
                 <!-- Navigation -->
                 <nav class="mdl-navigation">
                     <a class="mdl-navigation__link" href="">Link</a>
@@ -52,7 +52,7 @@
                 <a class="mdl-navigation__link" href="">Link</a>
             </nav>
         </div>
-        <div class="content">
+        <div class="content container">
             <div id="init-msg">
                 <P>
                     Please Enter Your Search Criteria From The Header
@@ -72,6 +72,45 @@
                     </thead>
                 </table>
             </div>
+            <div class="modal fade" id="purchaseModal" role="dialog">
+                    <div class="modal-dialog">
+        
+                        <!-- Modal content-->
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h4 class="modal-title">Order Detail</h4>
+                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            </div>
+                            <div class="modal-body">
+                                    <div class="mdl-textfield mdl-js-textfield">
+                                            <textarea class="mdl-textfield__input" type="text" rows="1" id="orderName"></textarea>
+                                            <label class="mdl-textfield__label" for="address">Address Name</label>
+                                          </div>
+
+                                <div class="mdl-textfield mdl-js-textfield">
+                                        <textarea class="mdl-textfield__input" type="text" rows="1" id="orderAddress"></textarea>
+                                        <label class="mdl-textfield__label" for="address">Full Address</label>
+                                      </div>
+                                <div class="mdl-textfield mdl-js-textfield">
+                                        <input class="mdl-textfield__input" type="text" pattern="[0-9]*" id="orderPhoneNumber">
+                                        <label class="mdl-textfield__label" for="phone">Phone</label>
+                                        <span class="mdl-textfield__error">Digits only</span>
+                                </div>
+
+                                <div class="mdl-textfield mdl-js-textfield">
+                                        <input class="mdl-textfield__input" type="text" pattern="[0-9]*" id="orderCardNumber">
+                                        <label class="mdl-textfield__label" for="phone">Credit Card Number</label>
+                                        <span class="mdl-textfield__error">Digits only</span>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="login-button mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored" data-dismiss="modal" onclick="purchase()">Submit</button>
+                                <button type="button" class="login-button mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" data-dismiss="modal">Close</button>
+                            </div>
+                        </div>
+        
+                    </div>
+                </div>
         </div>
     </div>
 </body>
@@ -79,6 +118,7 @@
 <script src="/node/jquery/dist/jquery.js"></script>
 <script src="/node/datatables.net/js/jquery.dataTables.js"></script>
 <script src="/node/datatables.net-bs4/js/dataTables.bootstrap4.js"></script>
+<script src="/node/bootstrap/dist/js/bootstrap.min.js"></script>
 <script src="/public/javascripts/home.js"></script>
 
 </html>

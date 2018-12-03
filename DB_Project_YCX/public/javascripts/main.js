@@ -3,6 +3,7 @@ _hideErrorMsg();
 _clearSession();
 
 function _clearSession() {
+    sessionStorage.setItem('customerId', null);
     sessionStorage.setItem('userType', null);
 }
 
@@ -30,6 +31,7 @@ function login() {
         success: function (response) {
             console.log(response)
             if (response.success) {
+                sessionStorage.setItem('customerId', userId);
                 if (response.data.type === 'admin') {
                     sessionStorage.setItem('userType','admin');
                     window.location.href = baseUrl + '/admin'
