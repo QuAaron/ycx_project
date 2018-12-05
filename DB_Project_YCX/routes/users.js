@@ -49,7 +49,7 @@ router.get('/login', function (req, res, next) {
 
 router.get('/items', function (req, res, next) {
   var keyword = req.query.keyword;
-  var sql = "SELECT * FROM `DB_Final`.product where name like '%" + keyword + "%'";
+  var sql = "SELECT * FROM product where name like '%" + keyword + "%'";
   var response = { success: false, msg: null, data: null };
 
   new Promise(function (resolve, reject) {
