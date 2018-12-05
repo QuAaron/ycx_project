@@ -418,9 +418,19 @@ router.get('/analytics4', function (req, res, next) {
 
 router.get('/analytics5', function (req, res, next) {
   var response = { success: false, msg: null, data: null };
-  var sql = "SELECT w.name, w.store,s1.region\n\
-  from sales_person_workday as w,sales_person_f as f1,store as s1\n\
-  where w.Sun='YES' and w.Wed='YES' and w.name=f1.name and f1.store_assign=s1.name;"
+  // var sql = "SELECT w.name, w.store,s1.region\n\
+  // from sales_person_workday as w,sales_person_f as f1,store as s1\n\
+  // where w.Sun='YES' and w.Wed='YES' and w.name=f1.name and f1.store_assign=s1.name;"
+  var sql = "select a.amount/b.total as proportion, a.brand\n\
+  from (select sum(a1.amount) as amount, a1.brand\n\
+       from (select p1.brand, o3.amount\n\
+                from product as p1, customer_order3 as o3\n\
+                where  o3.product_id=p1.product_id)as a1\n\
+      group by brand) as a,\n\
+      (select sum(customer_order3.Amount) as total\n\
+      from customer_order3) as b\n\
+  order by proportion;\n\
+  "
   console.log(sql)
   new Promise(function (resolve, reject) {
     connection.query(sql, function (err, rows, fields) {

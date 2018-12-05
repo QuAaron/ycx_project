@@ -379,7 +379,7 @@ function showAnalytics4() {
 
 function showAnalytics5() {
     initialMsg();
-    $('#analytics-header').text('Find the most popular brand sold in our website');
+    $('#analytics-header').text('Calculate the proportion of orders for all brands ');
     $.ajax({
         url: '/users/analytics5',
         type: "GET",
@@ -387,10 +387,10 @@ function showAnalytics5() {
             console.log(response)
             if (response.success) {
                 console.log('successfully get Analytics1');
-                $('#analytics-chart').append('<table class="table table-striped table-bordered" id="analytics1-table"> <thead> <tr><td>Name</td><td>Store</td><td>Region</td></tr> </thead> </table>')
+                $('#analytics-chart').append('<table class="table table-striped table-bordered" id="analytics1-table"> <thead> <tr><td>Proportion</td><td>Brand</td></tr> </thead> </table>')
                 var table = $('#analytics1-table');
                 response.data.forEach(element => {
-                    var row = '<tr><td>' + element.name + '</td><td>' + element.store + '</td><td>' + element.region + '</td></tr>';
+                    var row = '<tr><td>' + element.proportion + '</td><td>' + element.brand + '</td></tr>';
                     console.log(row)
                     table.append(row);
                 });
